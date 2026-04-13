@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+
+# Optional: uncomment if you don't want to upload your dataset and model to GitHub
+# dataset.csv
+# model.pkl

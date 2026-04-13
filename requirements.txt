@@ -1,0 +1,7 @@
+opencv-python
+mediapipe==0.10.14
+numpy
+pandas
+scikit-learn
+flask
+flask-cors

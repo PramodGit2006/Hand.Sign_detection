@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Sign AI Vision</title>
+    <!-- Modern Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Background Animated Shapes for depth -->
+    <div class="blob shape1"></div>
+    <div class="blob shape2"></div>
+    
+    <div class="main-container glass-panel">
+        <header>
+            <div class="status-indicator" id="status-indicator"></div>
+            <h1>Neural Vision AI</h1>
+            <p>Hold up a hand sign to the camera! The Neural Network detects your skeletal coordinates and recognizes the digit entirely in real-time.</p>
+        </header>
+
+        <div class="app-layout">
+            <!-- Left Side: Camera -->
+            <div class="camera-cluster">
+                <div class="video-wrapper">
+                    <video id="webcam" autoplay playsinline></video>
+                    <!-- Loading overlay before camera starts -->
+                    <div id="loader" class="loader-overlay">
+                        <div class="spinner"></div>
+                        <p>Accessing Camera...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: AI Dashboard -->
+            <div class="dashboard-cluster glass-panel">
+                <h2>Live Prediction</h2>
+                <!-- The giant glowing number! -->
+                <div class="prediction-box">
+                    <span id="prediction-text">-</span>
+                </div>
+                
+                <div class="stats-panel">
+                    <div class="stat">
+                        <span class="label">Status</span>
+                        <span class="value" id="ai-status">Waiting...</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Latency</span>
+                        <span class="value" id="ai-latency">0ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden Canvas used for grabbing compressed video frames -->
+    <canvas id="captureCanvas" style="display:none;"></canvas>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
