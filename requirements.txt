@@ -1,8 +1,10 @@
-opencv-python-headless
+opencv-python-headless==4.9.0.80
 mediapipe==0.10.35
+protobuf==3.20.3
 numpy
 pandas
 scikit-learn
+joblib
 flask
 flask-cors
 gunicorn

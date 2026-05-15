@@ -5,19 +5,23 @@ import numpy as np
 import base64
 import joblib
 import mediapipe as mp
-from mediapipe.python import solutions
 
 app = Flask(__name__)
 CORS(app)
 
 # Load the trained Scikit-Learn model
-model = joblib.load('model.pkl')
+try:
+    model = joblib.load('model.pkl')
+    print("Model loaded successfully.")
+except Exception as e:
+    print(f"WARNING: Could not load model.pkl: {e}")
+    model = None
 
 # Initialize MediaPipe Hands precisely as we did in data collection
 # Because we are processing sparse video frames from AJAX, static_image_mode=True is more robust
-mp_hands = solutions.hands
+mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
-    static_image_mode=True,       
+    static_image_mode=True,
     max_num_hands=1,
     min_detection_confidence=0.5
 )
@@ -79,6 +83,8 @@ def predict():
         features = np.array(normalized_landmarks).reshape(1, -1)
         
         # Instantly run it through our Neural Network logic!
+        if model is None:
+            return jsonify({'error': 'Model not loaded on server', 'prediction': None})
         prediction = model.predict(features)[0]
         
         return jsonify({
